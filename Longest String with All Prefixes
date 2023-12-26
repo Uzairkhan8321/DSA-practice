@@ -1,0 +1,30 @@
+#include <bits/stdc++.h> 
+
+string completeString(int n, vector<string> &a){
+
+    sort(a.begin(), a.end());
+
+    string ans = "";
+
+    string cur = "";
+
+    for (int r = 0; r < n; r++) {
+
+        if (a[r].length() == 1) cur = "";
+
+        if (a[r].length() > (cur.length() + 1) ||
+
+            a[r].substr(0, cur.length()) != cur)
+
+            continue;
+
+        cur = a[r];
+
+        if (ans.length() < cur.length()) ans = cur;
+
+    }
+
+    return ans.length() ? ans : "None";
+
+}
+
