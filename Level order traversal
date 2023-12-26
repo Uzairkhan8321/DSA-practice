@@ -1,0 +1,53 @@
+class Solution {
+public:
+    int levels(TreeNode *root)
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        else
+        {
+            return 1+ max(levels(root->left),levels(root->right));
+        }
+    }
+
+    //this function is to priont the nodes in individual levels
+    void nthlevel(TreeNode *root,int curr,int level,vector<int> &v)
+    {
+        if(root==NULL) return;
+        if(curr==level)
+        {
+            //vector me push kar
+            v.push_back(root->val);
+            return; // as wo level priint ho gaya 
+        }
+        nthlevel(root->left,curr+1,level,v);
+         nthlevel(root->right,curr+1,level,v);
+    }
+
+   //this function will print 
+    void nlevel(TreeNode *root, vector<vector<int>>&ans)
+    {
+        //phele levels nikal of the tree 
+        int n=levels(root);
+
+        //loop chala
+        //till the actual level of the tree
+        for(int i=1;i<=n;i++)
+        {
+            //ek vector bana taaki wo level ke nodes daal ske
+            vector<int>v;
+            //this function will get the nodes of the individual level
+            nthlevel(root,1,i,v);
+            ans.push_back(v);
+        }
+
+    }
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        //it is the function which will print the levels 
+        nlevel(root,ans);
+        return ans;
+    }
+};
