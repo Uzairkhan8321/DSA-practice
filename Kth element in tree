@@ -1,0 +1,16 @@
+int kthSmallest(TreeNode* root, int k) {
+    if(!root){return 0;}
+    vector<int>v;
+    queue<TreeNode*>q;
+    q.push(root);
+    while(!q.empty()){
+        root=q.front();
+        q.pop();
+        v.push_back(root->val);
+        if(root->left){q.push(root->left);}
+        if(root->right){q.push(root->right);}
+    }
+    sort(v.begin(), v.end());
+    if(v.size()<k){return 0;}
+    return v[k-1];
+}
